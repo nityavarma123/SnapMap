@@ -132,9 +132,9 @@ const MyUploadsScreen: React.FC = () => {
     if (!badge) return null;
 
     const badgeConfig: Record<BadgeType, { icon: string; color: string; backgroundColor: string }> = {
-      ended: { icon: '⏹', color: '#FF4757', backgroundColor: 'rgba(255, 71, 87, 0.1)' },
-      live: { icon: '📍', color: '#FF4757', backgroundColor: 'rgba(255, 71, 87, 0.1)' },
-      featured: { icon: '⭐', color: '#FFA502', backgroundColor: 'rgba(255, 165, 2, 0.1)' },
+      ended: { icon: '🔴', color: '#ffffff', backgroundColor: 'rgba(17, 24, 39, 0.8)' },
+      live: { icon: '⭕', color: '#FF4757', backgroundColor: 'rgb(255, 255, 255)' },
+      featured: { icon: '⭐', color: '#78350F', backgroundColor: 'rgba(252, 211, 77, 0.9)' },
     };
 
     const config = badgeConfig[badge];

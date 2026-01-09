@@ -1,12 +1,12 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
-const cardWidth = (width - 48) / 2; // 2 columns with padding
+const cardWidth = (width - 68) / 2; // 2 columns with padding
 
 export const myUploadsStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FAF5F0',
+    backgroundColor: '#FFF5F7',
   },
   header: {
     flexDirection: 'row',
@@ -15,7 +15,7 @@ export const myUploadsStyles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 60,
     paddingBottom: 20,
-    backgroundColor: '#FAF5F0',
+    backgroundColor: '#FFF5F7',
   },
   title: {
     fontSize: 32,
@@ -69,7 +69,7 @@ export const myUploadsStyles = StyleSheet.create({
     backgroundColor: 'white',
   },
   filterButtonActive: {
-    backgroundColor: '#FF4757',
+    backgroundColor: '#FF4D6D',
   },
   filterButtonText: {
     fontSize: 14,
@@ -113,7 +113,8 @@ export const myUploadsStyles = StyleSheet.create({
   uploadsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 8,
+    justifyContent: 'space-between',
+    gap: 12,
   },
   uploadCard: {
     width: cardWidth,
