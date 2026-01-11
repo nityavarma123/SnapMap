@@ -78,10 +78,18 @@ export const profileUpdate = async (req, res) => {
         }
         
         // Extract fields from request body
-        const { phoneNo, collegeName, year } = req.body;
+        const { name, bio, phoneNo, collegeName, year } = req.body;
         
         // Prepare update object with only provided fields
         const updateFields = {};
+        
+        if (name !== undefined) {
+            updateFields.name = name;
+        }
+        
+        if (bio !== undefined) {
+            updateFields.bio = bio;
+        }
         
         if (phoneNo !== undefined) {
             updateFields.phoneNumber = phoneNo;
