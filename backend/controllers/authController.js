@@ -58,6 +58,33 @@ export const registerUser = async(req,res) => {
     }
 }
 
+export const getProfile = async (req, res) => {
+    try {
+        console.log("GET PROFILE CALLED");
+        
+        const clerkUserId = req.userId;
+        
+        if (!clerkUserId) {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+        
+        const user = await User.findOne({ clerkUserId });
+        
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        
+        return res.status(200).json({
+            message: "Profile fetched successfully",
+            user
+        });
+        
+    } catch (error) {
+        console.error("GET PROFILE ERROR", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+
 export const profileUpdate = async (req, res) => {
     try {
         console.log("PROFILE UPDATE CALLED");
