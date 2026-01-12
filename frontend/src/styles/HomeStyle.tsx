@@ -49,23 +49,14 @@ const HomeStyle = StyleSheet.create({
     letterSpacing: -0.6,
     lineHeight: 32,
   },
-  notificationButton: {
+  profileButton: {
     width: 44,
     height: 44,
     borderRadius: 22,
-    backgroundColor: "#F3F4F6",
+    backgroundColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
-  },
-  notificationBadge: {
-    position: "absolute",
-    top: 8,
-    right: 8,
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: "#EF4444",
   },
   discoverySection: {
     paddingHorizontal: 20,
@@ -106,7 +97,7 @@ const HomeStyle = StyleSheet.create({
   },
   mapCard: {
     marginHorizontal: 20,
-    marginBottom: 0,
+    marginBottom: 16,
     borderRadius: 20,
     backgroundColor: "#FFFFFF",
     overflow: "hidden",
@@ -118,7 +109,6 @@ const HomeStyle = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 12,
     elevation: 8,
-    height: 400,
   },
   map: {
     width: "100%",
@@ -185,10 +175,8 @@ const HomeStyle = StyleSheet.create({
     elevation: 4,
   },
   fullMapCard: {
-    position: "absolute",
-    bottom: 16,
-    left: 16,
-    right: 16,
+    marginHorizontal: 20,
+    marginBottom: 20,
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#FFFFFF",
@@ -203,7 +191,6 @@ const HomeStyle = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 12,
     elevation: 12,
-    zIndex: 10,
   },
   fullMapIconContainer: {
     width: 40,

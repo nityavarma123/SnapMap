@@ -8,7 +8,8 @@ import {
   StatusBar,
   Image,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import { Dimensions } from "react-native";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import * as Location from "expo-location";
@@ -31,6 +32,7 @@ type PhotoMarker = {
 
 const HomeScreen = ({ navigation }: ScreenProps<"HomeScreen">) => {
   const { user } = useUser();
+  const insets = useSafeAreaInsets();
   const [location, setLocation] = useState<{
     latitude: number;
     longitude: number;
@@ -99,6 +101,8 @@ const HomeScreen = ({ navigation }: ScreenProps<"HomeScreen">) => {
 
   const mapLocation = location || defaultLocation;
   const activeCount = photos.length || 124;
+  const mapHeight =
+    (Dimensions.get("window").height - insets.top - insets.bottom) * 0.5;
 
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
@@ -122,13 +126,12 @@ const HomeScreen = ({ navigation }: ScreenProps<"HomeScreen">) => {
             </View>
           </View>
           <TouchableOpacity
-            style={styles.notificationButton}
+            style={styles.profileButton}
             onPress={() => {
-              // Navigate to notifications if needed
+              navigation.navigate("ProfileScreen");
             }}
           >
-            <Ionicons name="notifications-outline" size={24} color="#9CA3AF" />
-            <View style={styles.notificationBadge} />
+            <Ionicons name="person-circle-outline" size={28} color="#f43f5e" />
           </TouchableOpacity>
         </View>
 
@@ -145,7 +148,7 @@ const HomeScreen = ({ navigation }: ScreenProps<"HomeScreen">) => {
         </View>
 
         {/* Map Card */}
-        <View style={styles.mapCard}>
+        <View style={[styles.mapCard, { height: mapHeight }]}>
           {/* LIVE Indicator */}
           <View style={styles.liveIndicator}>
             <View style={styles.liveDot} />
@@ -191,26 +194,26 @@ const HomeScreen = ({ navigation }: ScreenProps<"HomeScreen">) => {
                 />
               ))}
           </MapView>
-
-          {/* Full Campus Map Card - Floating over map */}
-          <TouchableOpacity
-            style={styles.fullMapCard}
-            onPress={() => navigation.navigate("MapScreen")}
-          >
-            <View style={styles.fullMapIconContainer}>
-              <MaterialCommunityIcons
-                name="map"
-                size={24}
-                color="#FFFFFF"
-              />
-            </View>
-            <View style={styles.fullMapTextContainer}>
-              <Text style={styles.fullMapSubtext}>Tap to explore</Text>
-              <Text style={styles.fullMapText}>Full Campus Map</Text>
-            </View>
-            <Ionicons name="chevron-forward" size={24} color="#000000" />
-          </TouchableOpacity>
         </View>
+
+        {/* Full Campus Map Card - Below map */}
+        <TouchableOpacity
+          style={styles.fullMapCard}
+          onPress={() => navigation.navigate("MapScreen")}
+        >
+          <View style={styles.fullMapIconContainer}>
+            <MaterialCommunityIcons
+              name="map"
+              size={24}
+              color="#FFFFFF"
+            />
+          </View>
+          <View style={styles.fullMapTextContainer}>
+            <Text style={styles.fullMapSubtext}>Tap to explore</Text>
+            <Text style={styles.fullMapText}>Full Campus Map</Text>
+          </View>
+          <Ionicons name="chevron-forward" size={24} color="#000000" />
+        </TouchableOpacity>
       </ScrollView>
 
       {/* Bottom Navigation */}

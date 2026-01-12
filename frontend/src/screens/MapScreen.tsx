@@ -1,10 +1,12 @@
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from "react-native";
 import React, { useState, useEffect } from "react";
 import * as Location from "expo-location";
 import type { ScreenProps } from "../types";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
 import MapStyle from "../styles/MapStyle";
+import BottomNavigation from "../navigation/BottomNavigation";
 import Constants from "expo-constants";
 
 const styles = MapStyle;
@@ -98,7 +100,7 @@ const MapScreen = ({ navigation }: ScreenProps<"MapScreen">) => {
 
 
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={styles.container} edges={["top"]}>
       <MapView
         style={StyleSheet.absoluteFill}
         provider={PROVIDER_GOOGLE}
@@ -122,20 +124,33 @@ const MapScreen = ({ navigation }: ScreenProps<"MapScreen">) => {
         ))}
       </MapView>
 
-      <TouchableOpacity
-        style={styles.CameraButton}
-        onPress={() => navigation.navigate("CameraScreen")}
-      >
-        <FontAwesome name="camera" size={20} color="white" />
-      </TouchableOpacity>
+      {/* Top Search Bar with Back Button and Profile Icon */}
+      <View style={styles.topBar}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="arrow-back" size={24} color="#000000" />
+        </TouchableOpacity>
+        <View style={styles.searchBar}>
+          <Ionicons name="search" size={20} color="#9CA3AF" style={styles.searchIcon} />
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search campus..."
+            placeholderTextColor="#9CA3AF"
+          />
+        </View>
+        <TouchableOpacity
+          style={styles.profileButton}
+          onPress={() => navigation.navigate("ProfileScreen")}
+        >
+          <Ionicons name="person-circle-outline" size={28} color="#f43f5e" />
+        </TouchableOpacity>
+      </View>
 
-      <TouchableOpacity
-        style={styles.HomeButton}
-        onPress={() => navigation.navigate("HomeScreen")}
-      >
-        <FontAwesome name="home" size={25} color="white" />
-      </TouchableOpacity>
-    </View>
+      {/* Bottom Navigation */}
+      <BottomNavigation />
+    </SafeAreaView>
   );
 };
 
